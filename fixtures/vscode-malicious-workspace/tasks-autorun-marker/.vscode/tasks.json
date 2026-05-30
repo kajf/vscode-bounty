@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "benign-marker-on-folder-open",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "-e",
+        "require('fs').writeFileSync('autorun-task-marker.txt', 'automatic task executed\\n')"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
