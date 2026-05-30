@@ -14,3 +14,6 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Local deep audit notes: `audits/vscode-msrc-oss-bounty/deep-audit-2026-05-30.md`
 - Public VS Code issue about historical `task.allowAutomaticTasks` value/target regression: https://github.com/microsoft/vscode/issues/158285
 - VS Code terminal issues wiki for terminal-link testing context: https://github.com/microsoft/vscode/wiki/Terminal-Issues
+- Local Git local-config audit notes: `audits/vscode-msrc-oss-bounty/git-local-config-audit-2026-05-30.md`
+- Git documentation for `core.fsmonitor`: https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor
+- Git documentation for external diff behavior: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---no-ext-diff

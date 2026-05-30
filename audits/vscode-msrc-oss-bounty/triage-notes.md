@@ -47,3 +47,12 @@ A report should only be drafted after a reproducible issue is validated against 
 - Source review result: terminal URL links require link activation and use `openExternal: true`; this should avoid the internal `CommandOpener` path for `command:` output.
 - Bounty relevance: medium if runtime testing shows a printed link can execute an internal command, open a sensitive local file, or misrepresent the action to the user.
 - Current status: **not a vulnerability** based on source review; runtime validation still needed.
+
+
+## Finding candidate G: repository-local Git config helpers (`core.fsmonitor`, `diff.external`)
+
+- Scenario prepared by fixture generator: a folder with a pre-existing `.git/config` points `core.fsmonitor` and `diff.external` at benign marker scripts inside the worktree.
+- Source review result: the built-in Git extension is unsupported in untrusted workspaces, but after trust it invokes ordinary Git status/diff paths. `git status` can invoke `core.fsmonitor`, while Git-backed quick diff and diff views can reach `git diff` without `--no-ext-diff`.
+- Local Git command confirmation: outside VS Code, `git status --porcelain=v1` invoked the fsmonitor marker and `git diff -- tracked.txt` invoked the external-diff marker; `git diff --no-ext-diff -- tracked.txt` suppressed only the external diff helper.
+- Bounty relevance: potentially high only if VS Code reaches these helpers before Workspace Trust, from a normal in-scope clone/open flow, or without meaningful user consent. If execution occurs only after explicit trust of a folder containing attacker-controlled `.git/config`, this is more likely hardening guidance than a bounty-quality issue.
+- Current status: **promising but not report-ready**; clean-profile VS Code runtime validation is required.

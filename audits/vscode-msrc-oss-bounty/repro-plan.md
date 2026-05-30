@@ -61,3 +61,13 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 4. Confirm link activation requires the normal terminal modifier or quick-pick selection.
 5. Confirm `command:`-shaped output does not execute an internal VS Code command through the terminal URL opener.
 6. Record how `vscode:`, `vscode-insiders:`, `file:`, and encoded `https:` targets are displayed and opened.
+
+## Git local-config helper fixture expected result
+
+1. Generate a throwaway fixture outside the repository, for example: `fixtures/vscode-malicious-workspace/git-local-config-hooks/create-fixture.sh /tmp/vscode-git-local-config-worktree`.
+2. Confirm baseline Git behavior by running `git status --porcelain=v1`, `git diff -- tracked.txt`, and `git diff --no-ext-diff -- tracked.txt` inside the generated worktree and inspecting `git-local-config-marker.txt`.
+3. Open the generated worktree in VS Code with clean user data and extensions.
+4. Before granting Workspace Trust, confirm `git-local-config-marker.txt` is absent or unchanged.
+5. After granting trust, observe whether Git repository discovery/status refresh appends `core.fsmonitor invoked`.
+6. Open `tracked.txt` and/or a diff view to observe whether quick diff or explicit diff actions append `diff.external invoked`.
+7. Repeat with `scm.diffDecorations: none` to separate passive editor decorations from explicit diff commands.
