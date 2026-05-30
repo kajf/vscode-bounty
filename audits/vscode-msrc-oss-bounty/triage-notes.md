@@ -25,3 +25,10 @@
 ## No MSRC report drafted
 
 A report should only be drafted after a reproducible issue is validated against the latest actively maintained branch. This pass did not meet that threshold.
+
+## Finding candidate D: workspace settings attempt to weaken trust/automation controls
+
+- Scenario prepared by fixture: a repository-controlled `.vscode/settings.json` attempts to set `security.workspace.trust.enabled: false`, suppress trust UI, set `task.allowAutomaticTasks: on`, and override extension untrusted-workspace support.
+- Source review result: the relevant settings are registered as application-scoped, and `task.allowAutomaticTasks` is also marked restricted. This should prevent the repository from granting itself automatic execution privileges or disabling Workspace Trust.
+- Bounty relevance: high only if runtime testing shows these values are honored from workspace scope early enough to bypass trust, automatic-task permission, or built-in extension boundaries.
+- Current status: **not a vulnerability** based on source review; runtime validation still needed with clean user data.

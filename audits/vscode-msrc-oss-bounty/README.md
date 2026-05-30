@@ -14,17 +14,16 @@ Primary scenario: a victim opens an attacker-controlled repository or workspace 
 
 - Container working directory: `/workspace/vscode-bounty`.
 - Current branch before committing notes: `work`.
-- Attempted local clone: `git clone --depth=1 https://github.com/microsoft/vscode.git repos/vscode`.
-- Result: blocked by the container network/proxy with `CONNECT tunnel failed, response 403`.
-- Attempted tarball probe: `curl -I -L https://github.com/microsoft/vscode/archive/refs/heads/main.tar.gz`.
-- Result: blocked by the same `CONNECT tunnel failed, response 403` limitation.
-- Because the source tree could not be cloned in this container, this initial pass used browser-accessible upstream pages plus local benign fixtures and did not build or run VS Code.
+- Local clone: `git clone --depth=1 https://github.com/microsoft/vscode.git repos/vscode` succeeded in this pass.
+- Upstream commit audited: `1f98b39208918cace8d36e2a4f20b7b9282508f1` (`Avoid leaving detached DOM elements in Getting Started (#319128)`).
+- Full build/run status: not attempted in this pass; source review and fixture preparation were completed, and future runtime validation should use a clean VS Code profile.
+- Local fixture content remains benign and marker-based only.
 
 ## Upstream version anchors observed
 
 - GitHub repository page read 2026-05-30 showed branch `main`, repository `microsoft/vscode`, and latest release `1.122.1` dated 2026-05-29.
-- The repository page showed the expected source layout including `src`, `extensions`, `.vscode`, `remote`, `cli`, `build`, and top-level `SECURITY.md`.
+- Local source checkout confirmed the expected source layout including `src`, `extensions`, `.vscode`, `remote`, `cli`, `build`, and top-level `SECURITY.md`.
 
 ## Initial conclusion
 
-No validated, reproducible in-scope vulnerability was found in this initial environment-limited pass. No MSRC report draft is included because the current findings are either expected VS Code behavior, blocked from local validation, or require additional source/build work.
+No validated, reproducible in-scope vulnerability was found in this initial source-audit pass. No MSRC report draft is included because the current findings are expected VS Code behavior, source-review-only leads, or require runtime validation against a clean local VS Code profile.

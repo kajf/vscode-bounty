@@ -30,6 +30,14 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 3. Run the visible task intentionally.
 4. Confirm `manual-task-marker.txt` is created only after that deliberate action.
 
+## Restricted workspace-settings fixture expected result
+
+1. Open `fixtures/vscode-malicious-workspace/settings-restricted` with clean user data.
+2. Confirm VS Code does not treat workspace-provided `security.workspace.trust.enabled: false` as disabling Workspace Trust.
+3. Confirm workspace-provided `task.allowAutomaticTasks: on` does not globally allow automatic tasks.
+4. Confirm workspace-provided `extensions.supportUntrustedWorkspaces` does not alter built-in trust boundaries from repository scope.
+5. Record any settings UI warnings that indicate application-scoped or restricted settings are ignored at workspace scope.
+
 ## Markdown fixture expected result
 
 1. Open markdown samples in preview with clean user data.

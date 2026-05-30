@@ -8,3 +8,6 @@
 - Stack Overflow discussion summarizing automatic task allow behavior: https://stackoverflow.com/a/72947814/126352
 
 These sources are references for audit orientation only. Any actual vulnerability report must be based on a local reproduction against the latest actively maintained branch.
+
+- Local source audit notes: `audits/vscode-msrc-oss-bounty/source-audit-2026-05-30.md`
+- Local VS Code checkout: `repos/vscode` at commit `1f98b39208918cace8d36e2a4f20b7b9282508f1` (ignored by git).
