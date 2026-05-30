@@ -17,3 +17,4 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Local Git local-config audit notes: `audits/vscode-msrc-oss-bounty/git-local-config-audit-2026-05-30.md`
 - Git documentation for `core.fsmonitor`: https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefsmonitor
 - Git documentation for external diff behavior: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---no-ext-diff
+- Local MCP trust/autostart audit notes: `audits/vscode-msrc-oss-bounty/mcp-trust-audit-2026-05-30.md`

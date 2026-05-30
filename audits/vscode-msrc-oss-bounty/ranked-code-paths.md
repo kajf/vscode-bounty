@@ -13,7 +13,7 @@ Ranking uses bounty relevance, exploit plausibility, and ability to produce publ
 | 7 | Terminal links/providers | terminal link manager, local/remote file link resolver, opener service | Terminal output from tasks or build scripts may contain links; command/file URI parsing mistakes can create clickjacking or command invocation risks. | Source-reviewed; terminal-link fixture added; runtime validation pending. |
 | 8 | Protocol handlers and URL/file parsing | opener service, trusted domains, URL handlers, `vscode://`/`vscode-insiders://` handlers | URI parsing confusion could cause unexpected file open, command execution, or trust prompts bypasses. | Source-reviewed for extension/chat/plugin/prompt handlers; fuzzing pending. |
 | 9 | Git clone/open-folder flows | Git extension, clone UI, folder open/reload flow, workspace trust transition code, repository-local Git config helpers | Clone/open flows are directly relevant to malicious repository attacks; local `.git/config` helpers such as `core.fsmonitor` and `diff.external` can execute through ordinary Git commands if reachable. | Source-reviewed; Git local-config fixture added; runtime validation pending. |
-| 10 | Extension host boundaries | extension host activation events, workspace trust capabilities, built-in extensions only | Bounty excludes non-default extensions, but default/built-in extension activation from workspace content remains relevant. | Partially reviewed through debug/MCP/markdown built-ins; broader activation review pending. |
+| 10 | Extension host boundaries | extension host activation events, workspace trust capabilities, built-in extensions only | Bounty excludes non-default extensions, but default/built-in extension activation from workspace content remains relevant. | Partially reviewed through debug/MCP/markdown built-ins; MCP trust/autostart pass added; broader activation review pending. |
 
 ## Highest-priority next checks after a successful clone
 
@@ -22,5 +22,5 @@ Ranking uses bounty relevance, exploit plausibility, and ability to produce publ
 3. Confirm workspace settings marked as restricted cannot be changed by a malicious repository to enable automatic tasks or command URIs.
 4. Trace markdown preview sanitizer and link activation rules for `command:`, `vscode:`, `file:`, and encoded/redirected variants.
 5. Review opener/trusted-domain code for URL canonicalization, wildcard handling, punycode/IDNA, and authority confusion.
-6. Enumerate MCP `autoTrustChanges` call sites and verify each is reachable only after a deliberate user action.
+6. Runtime-test MCP dev-mode autostart and install-triggered `startServerByFilter()` flows with workspace-defined servers.
 7. Runtime-test the Git local-config helper fixture before and after Workspace Trust, with `scm.diffDecorations` both enabled and disabled.

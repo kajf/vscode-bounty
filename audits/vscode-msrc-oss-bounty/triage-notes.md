@@ -56,3 +56,11 @@ A report should only be drafted after a reproducible issue is validated against 
 - Local Git command confirmation: outside VS Code, `git status --porcelain=v1` invoked the fsmonitor marker and `git diff -- tracked.txt` invoked the external-diff marker; `git diff --no-ext-diff -- tracked.txt` suppressed only the external diff helper.
 - Bounty relevance: potentially high only if VS Code reaches these helpers before Workspace Trust, from a normal in-scope clone/open flow, or without meaningful user consent. If execution occurs only after explicit trust of a folder containing attacker-controlled `.git/config`, this is more likely hardening guidance than a bounty-quality issue.
 - Current status: **promising but not report-ready**; clean-profile VS Code runtime validation is required.
+
+
+## Finding candidate H: MCP trust/autostart and `autoTrustChanges`
+
+- Scenario reviewed: workspace-defined MCP servers, automatic server startup, install-triggered startup, code-lens Start/Restart/Debug actions, and changed TrustedOnNonce definitions.
+- Source review result: background/autostart paths generally use `errorOnUserInteraction: true` and should fail closed when Workspace Trust, server trust, or input variables would require UI. `autoTrustChanges: true` was observed on user-facing code-lens Start/Restart/Debug actions, not background autostart.
+- Bounty relevance: high only if a workspace-defined MCP server can start local commands before Workspace Trust, without server trust/nonce approval, or through an automatic path that silently auto-trusts changed definitions.
+- Current status: **no bypass found in source review**; runtime validation remains worthwhile for MCP dev-mode autostart and post-install start flows.

@@ -15,7 +15,7 @@ Primary scenario: a victim opens an attacker-controlled repository or workspace 
 - Container working directory: `/workspace/vscode-bounty`.
 - Current branch before committing notes: `work`.
 - Local clone: `git clone --depth=1 https://github.com/microsoft/vscode.git repos/vscode` succeeded in this pass.
-- Upstream commits audited: initial source pass at `1f98b39208918cace8d36e2a4f20b7b9282508f1`; deeper and Git local-config passes at `f6d1fcfcfcb5225125221ff6fdd6ae8c699958d5`.
+- Upstream commits audited: initial source pass at `1f98b39208918cace8d36e2a4f20b7b9282508f1`; deeper, Git local-config, and MCP trust/autostart passes at `f6d1fcfcfcb5225125221ff6fdd6ae8c699958d5`.
 - Full build/run status: not attempted in these passes; source review and fixture preparation were completed, and future runtime validation should use a clean VS Code profile.
 - Local fixture content remains benign and marker-based only, including generated Git helper scripts that append marker text rather than performing destructive actions.
 
