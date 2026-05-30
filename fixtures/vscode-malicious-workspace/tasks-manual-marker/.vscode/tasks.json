@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "benign-manual-marker",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "-e",
+        "require('fs').writeFileSync('manual-task-marker.txt', 'manual task executed\\n')"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
