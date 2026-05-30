@@ -44,3 +44,20 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 2. Confirm script-like HTML does not execute.
 3. Confirm `command:` or `vscode:` links do not perform privileged actions without explicit, understandable user mediation.
 4. Record exact UI prompts and whether link targets are displayed/canonicalized safely.
+
+## Debug preLaunchTask fixture expected result
+
+1. Open `fixtures/vscode-malicious-workspace/launch-prelaunch-marker` with clean user data.
+2. Confirm `debug-prelaunch-marker.txt` is absent before any debug configuration is started.
+3. Start the `benign-node-with-prelaunch-marker` debug configuration deliberately.
+4. Confirm VS Code requests Workspace Trust before running build/program code from the workspace.
+5. Only after explicit trust and debug start, the marker may be created; that is expected debug/preLaunchTask behavior, not a vulnerability.
+
+## Terminal link fixture expected result
+
+1. Open `fixtures/vscode-malicious-workspace/terminal-link-samples` with clean user data.
+2. Confirm no terminal output appears merely from opening the folder.
+3. Run the `emit-benign-terminal-links` task manually.
+4. Confirm link activation requires the normal terminal modifier or quick-pick selection.
+5. Confirm `command:`-shaped output does not execute an internal VS Code command through the terminal URL opener.
+6. Record how `vscode:`, `vscode-insiders:`, `file:`, and encoded `https:` targets are displayed and opened.

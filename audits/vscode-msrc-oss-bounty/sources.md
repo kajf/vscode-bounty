@@ -11,3 +11,6 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 
 - Local source audit notes: `audits/vscode-msrc-oss-bounty/source-audit-2026-05-30.md`
 - Local VS Code checkout: `repos/vscode` at commit `1f98b39208918cace8d36e2a4f20b7b9282508f1` (ignored by git).
+- Local deep audit notes: `audits/vscode-msrc-oss-bounty/deep-audit-2026-05-30.md`
+- Public VS Code issue about historical `task.allowAutomaticTasks` value/target regression: https://github.com/microsoft/vscode/issues/158285
+- VS Code terminal issues wiki for terminal-link testing context: https://github.com/microsoft/vscode/wiki/Terminal-Issues

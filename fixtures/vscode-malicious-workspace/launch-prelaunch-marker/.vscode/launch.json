@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "benign-node-with-prelaunch-marker",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.js",
+      "preLaunchTask": "benign-debug-prelaunch-marker"
+    }
+  ]
+}
