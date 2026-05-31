@@ -1,0 +1,4 @@
+/* Benign marker stylesheet for testing restricted markdown.styles behavior. */
+body::before {
+  content: "markdown-opener-links fixture stylesheet loaded";
+}

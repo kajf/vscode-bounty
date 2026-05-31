@@ -40,10 +40,11 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 
 ## Markdown fixture expected result
 
-1. Open `fixtures/vscode-malicious-workspace/markdown-preview-links/sample.md` in Markdown Preview with clean user data.
-2. Confirm script-like HTML does not set `data-inline-script-ran` or `data-inline-handler-ran` in the preview DOM under default security settings.
-3. Confirm `command:` links do not execute internal VS Code commands and `vscode:` links do not perform privileged actions without explicit, understandable user mediation.
-4. Record exact UI prompts and whether link targets are displayed/canonicalized safely.
+1. Open both `fixtures/vscode-malicious-workspace/markdown-preview-links/sample.md` and `fixtures/vscode-malicious-workspace/markdown-opener-links/sample.md` in Markdown Preview with clean user data.
+2. Confirm script-like HTML does not set DOM markers such as `data-inline-script-ran`, `data-inline-handler-ran`, or `data.markdownFixture` in the preview DOM under default security settings.
+3. Confirm workspace-provided `markdown.styles` in `markdown-opener-links/.vscode/settings.json` is treated as restricted before trust.
+4. Confirm `command:` links do not execute internal VS Code commands and `vscode:` links do not perform privileged actions without explicit, understandable user mediation.
+5. Record exact UI prompts and whether `command:`, encoded `command:`, `vscode:`, `vscode-insiders:`, `file:`, localhost, and external `https:` targets are displayed/canonicalized safely.
 
 ## Debug preLaunchTask fixture expected result
 
