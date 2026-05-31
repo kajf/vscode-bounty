@@ -81,3 +81,21 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 4. Run `Tasks: Run Task`; expected safe behavior is a Workspace Trust prompt before task listing can execute workspace code.
 5. If the folder is trusted and application-scoped `gulp.autoDetect` is explicitly set to `on`, listing tasks may invoke the fake local gulp shim and create `GULP_AUTODETECT_MARKER.txt`; that is expected opt-in discovery behavior, not a reportable issue by itself.
 6. Running the npm `build` task should require deliberate task selection and then create `NPM_SCRIPT_MARKER.txt` as expected task execution behavior.
+
+
+## Protocol handler / extension URI fixture expected result
+
+1. Open `fixtures/vscode-malicious-workspace/settings-restricted` with clean user data.
+2. Confirm workspace-provided `extensions.confirmedUriHandlerExtensionIds` is ignored because it is application-scoped.
+3. From a separate controlled source, test benign `vscode://vscode.git/clone?...` and extension-handler URI shapes only with non-sensitive local/test URLs.
+4. Confirm extension URI handlers show the expected confirmation prompt unless the extension is trusted through profile/application state, not workspace settings.
+5. Confirm Git clone protocol handling does not open/trust the cloned folder or run repository code without explicit user-mediated clone/open steps.
+
+
+## Task/debug variable-resolution expected result
+
+1. Extend or create a throwaway fixture with `${command:*}` and `inputs[].type: "command"` entries in `tasks.json` and `launch.json`, using only benign built-in commands.
+2. Open with clean user data and do not grant Workspace Trust.
+3. Confirm variable commands are not executed on folder open or passive configuration discovery.
+4. Invoke task/debug flows deliberately and confirm VS Code requests Workspace Trust before resolving variables that could execute commands.
+5. Confirm canceling any prompt aborts the task/debug launch rather than continuing with partial or attacker-chosen defaults.

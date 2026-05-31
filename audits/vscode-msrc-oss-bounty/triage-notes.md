@@ -88,3 +88,19 @@ A report should only be drafted after a reproducible issue is validated against 
 - Source review result: default Markdown preview uses nonce-based CSP despite `enableScripts: true`; `markdown.styles` is restricted in untrusted workspaces; relative links are resolved through the Markdown extension; reviewed preview link handling does not enable arbitrary `command:` execution.
 - Bounty relevance: high only if repository Markdown can execute script or internal commands under default preview security, or can make pass-through protocol links perform privileged actions without understandable user mediation.
 - Current status: **no bypass found in source review**; clean-profile runtime validation is pending.
+
+
+## Finding candidate L: protocol handlers and extension URI confirmation
+
+- Scenario prepared by fixture: workspace settings attempt to pre-authorize built-in extension URI handlers through `extensions.confirmedUriHandlerExtensionIds`.
+- Source review result: the setting is application-scoped; generic extension URI handling prompts unless the extension is trusted by product/profile/application state; Git `/clone` validates URL schemes and refs before invoking `git.clone`; MCP install/by-name URLs open install/gallery UI rather than directly starting workspace commands.
+- Bounty relevance: high only if repository-controlled links can suppress URI-handler confirmation, install/activate extensions without user mediation, or transition from Git/MCP protocol handling into command execution before trust gates.
+- Current status: **no bypass found in source review**; clean-profile runtime validation is pending for prompt behavior and ignored workspace-scoped URI-handler trust settings.
+
+
+## Finding candidate M: task/debug command and input variables
+
+- Scenario reviewed: repository-controlled `${command:*}` variables and `inputs[].type: "command"` in task/debug configuration.
+- Source review result: command/input variables can execute registered VS Code commands during resolution, but task listing/running and debug startup are gated by Workspace Trust and explicit task/debug flows; canceled input aborts resolution.
+- Bounty relevance: high only if repository-defined variables execute before Workspace Trust, on folder open, or through a UI path that hides the command source and security implication.
+- Current status: **no bypass found in source review**; runtime validation should focus on variable resolution before/after trust and on any non-task/debug callers of `resolveWithInteractionReplace`.

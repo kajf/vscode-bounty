@@ -21,3 +21,5 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Local built-in task-provider audit notes: `audits/vscode-msrc-oss-bounty/builtin-task-provider-audit-2026-05-30.md`
 - Local terminal/opener command-URI audit notes: `audits/vscode-msrc-oss-bounty/terminal-opener-audit-2026-05-31.md`
 - Local Markdown preview audit notes: `audits/vscode-msrc-oss-bounty/markdown-preview-audit-2026-05-31.md`
+- Local protocol handler audit notes: `audits/vscode-msrc-oss-bounty/protocol-handler-audit-2026-05-31.md`
+- Local task/debug variable-resolution audit notes: `audits/vscode-msrc-oss-bounty/variable-resolution-audit-2026-05-31.md`
