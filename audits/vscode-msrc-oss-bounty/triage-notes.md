@@ -104,3 +104,11 @@ A report should only be drafted after a reproducible issue is validated against 
 - Source review result: command/input variables can execute registered VS Code commands during resolution, but task listing/running and debug startup are gated by Workspace Trust and explicit task/debug flows; canceled input aborts resolution.
 - Bounty relevance: high only if repository-defined variables execute before Workspace Trust, on folder open, or through a UI path that hides the command source and security implication.
 - Current status: **no bypass found in source review**; runtime validation should focus on variable resolution before/after trust and on any non-task/debug callers of `resolveWithInteractionReplace`.
+
+
+## Finding candidate N: built-in extension activation in untrusted workspaces
+
+- Scenario reviewed: repository files that satisfy built-in extension activation events, especially `workspaceContains:*`, and repository settings that attempt to override untrusted-workspace support.
+- Source review result: only the built-in npm extension had `workspaceContains:package.json` in this checkout and it declares limited untrusted-workspace support; extension enablement disables workspace-located or trust-required extensions in untrusted workspaces; `extensions.supportUntrustedWorkspaces` is application-scoped.
+- Bounty relevance: high only if a built-in/default extension remains enabled in untrusted workspaces and performs repository-controlled command execution, file writes, or data exposure merely from activation.
+- Current status: **no generic bypass found in source review**; runtime validation should focus on npm activation and any future built-in extension with `workspaceContains` or startup activation plus untrusted support.

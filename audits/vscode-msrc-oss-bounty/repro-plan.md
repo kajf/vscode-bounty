@@ -99,3 +99,11 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 3. Confirm variable commands are not executed on folder open or passive configuration discovery.
 4. Invoke task/debug flows deliberately and confirm VS Code requests Workspace Trust before resolving variables that could execute commands.
 5. Confirm canceling any prompt aborts the task/debug launch rather than continuing with partial or attacker-chosen defaults.
+
+
+## Built-in extension activation expected result
+
+1. Open fixtures containing activation-trigger files such as `package.json` with clean user data and an initially untrusted workspace.
+2. Confirm activation of limited-support built-ins such as npm does not execute repository scripts or local binaries merely from activation.
+3. Confirm workspace-provided `extensions.supportUntrustedWorkspaces` is ignored because it is application-scoped.
+4. After granting trust, observe which built-ins activate and ensure any command execution still requires explicit task/debug/user action.

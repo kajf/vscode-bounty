@@ -23,3 +23,4 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Local Markdown preview audit notes: `audits/vscode-msrc-oss-bounty/markdown-preview-audit-2026-05-31.md`
 - Local protocol handler audit notes: `audits/vscode-msrc-oss-bounty/protocol-handler-audit-2026-05-31.md`
 - Local task/debug variable-resolution audit notes: `audits/vscode-msrc-oss-bounty/variable-resolution-audit-2026-05-31.md`
+- Local built-in extension trust/activation audit notes: `audits/vscode-msrc-oss-bounty/extension-trust-activation-audit-2026-05-31.md`
