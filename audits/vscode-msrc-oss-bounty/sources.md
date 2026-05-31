@@ -24,3 +24,4 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Local protocol handler audit notes: `audits/vscode-msrc-oss-bounty/protocol-handler-audit-2026-05-31.md`
 - Local task/debug variable-resolution audit notes: `audits/vscode-msrc-oss-bounty/variable-resolution-audit-2026-05-31.md`
 - Local built-in extension trust/activation audit notes: `audits/vscode-msrc-oss-bounty/extension-trust-activation-audit-2026-05-31.md`
+- Local runtime validation: VS Code Stable `1.122.1` (`8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e`, x64) installed from the official Linux `.deb` endpoint and run under Xvfb with clean profiles against local fixtures (2026-05-31).

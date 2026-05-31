@@ -22,6 +22,13 @@
 - Bounty relevance: medium to high if repository markdown can trigger XSS in a privileged webview, leak local files, or invoke commands without meaningful user consent.
 - Current status: **source-reviewed but not runtime-validated**. No bypass was found in the markdown preview CSP/link handling review; runtime fuzzing remains pending.
 
+## Runtime validation pass 2026-05-31: clean-profile passive open
+
+- Runtime target: VS Code Stable `1.122.1` (`8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e`, x64) under Xvfb with fresh `--user-data-dir` and `--extensions-dir` per fixture.
+- Fixtures opened without UI interaction: `tasks-autorun-marker`, `tasks-manual-marker`, `launch-prelaunch-marker`, `task-provider-autodetect`, generated `git-local-config-hooks` worktree, and `settings-restricted`.
+- Result: no marker files were created for automatic folder-open tasks, manual tasks, debug `preLaunchTask`, fake gulp/npm autodetect scripts, or Git local-config helpers.
+- Triage impact: passive-open code execution was not reproduced. Future work should focus on explicit trusted-workspace UI automation and SCM/diff actions rather than more open-only runs.
+
 ## No MSRC report drafted
 
 A report should only be drafted after a reproducible issue is validated against the latest actively maintained branch. This pass did not meet that threshold.
