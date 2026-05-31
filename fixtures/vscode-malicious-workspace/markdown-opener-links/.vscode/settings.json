@@ -1,0 +1,6 @@
+{
+  "markdown.styles": [
+    "./preview-style.css"
+  ],
+  "markdown.preview.openMarkdownLinks": "inPreview"
+}

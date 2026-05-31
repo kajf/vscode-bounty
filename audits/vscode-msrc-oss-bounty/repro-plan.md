@@ -40,10 +40,11 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 
 ## Markdown fixture expected result
 
-1. Open markdown samples in preview with clean user data.
-2. Confirm script-like HTML does not execute.
-3. Confirm `command:` or `vscode:` links do not perform privileged actions without explicit, understandable user mediation.
-4. Record exact UI prompts and whether link targets are displayed/canonicalized safely.
+1. Open `fixtures/vscode-malicious-workspace/markdown-opener-links/sample.md` in preview with clean user data and extensions.
+2. Confirm script-like HTML does not execute and no unexpected DOM/marker side effect is observed.
+3. Confirm workspace-provided `markdown.styles` is treated as a restricted setting before trust.
+4. Confirm `command:` or `vscode:` links do not perform privileged actions without explicit, understandable user mediation.
+5. Record exact UI prompts and whether `command:`, encoded `command:`, `vscode:`, `vscode-insiders:`, `file:`, `http://localhost`, and `https:` targets are displayed/canonicalized safely.
 
 ## Debug preLaunchTask fixture expected result
 

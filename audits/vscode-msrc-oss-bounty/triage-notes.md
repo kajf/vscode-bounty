@@ -72,3 +72,19 @@ A report should only be drafted after a reproducible issue is validated against 
 - Source review result: npm discovery reads `package.json` and creates task objects without running scripts; gulp/grunt/jake discovery can execute local listing commands, but their auto-detect settings default off and task listing/running paths are guarded by the central task-service Workspace Trust prompt.
 - Bounty relevance: high only if default task discovery or task execution can reach repository-controlled commands before Workspace Trust, without the task-listing prompt, or without the relevant user/application setting.
 - Current status: **no bypass found in source review**; clean-profile runtime validation is pending for marker absence before trust and expected marker creation only after explicit trust plus provider opt-in.
+
+
+## Finding candidate J: Markdown preview and opener routing
+
+- Scenario prepared by fixture: Markdown content contains command/protocol/file/external/localhost link shapes plus raw HTML script-like samples and a workspace-scoped `markdown.styles` attempt.
+- Source review result: normal Markdown preview links resolve through the Markdown language server and `vscode.open`, which refuses `command:` URIs; the generic command opener requires `allowCommands`; preview CSP is active outside the explicit user-selected all-content mode; external HTTP(S) links use trusted-domain validation.
+- Bounty relevance: high only if repository Markdown can execute commands/scripts, weaken preview security, or silently open sensitive local/external targets without clear activation and mediation.
+- Current status: **no bypass found in source review**; clean-profile runtime validation and URI fuzzing remain pending.
+
+
+## Finding candidate K: restricted workspace settings
+
+- Scenario covered by fixtures: repository `.vscode/settings.json` attempts to set Workspace Trust controls, automatic-task policy, extension trust overrides, and restricted Markdown preview styling.
+- Source review result: `task.allowAutomaticTasks` and `extensions.supportUntrustedWorkspaces` are application-scoped; automatic tasks return before inspecting policy in untrusted workspaces; extension-contributed restricted configurations are tracked from untrusted-workspace metadata; `markdown.styles` is restricted.
+- Bounty relevance: high only if repository-scoped settings can weaken Workspace Trust, enable automatic execution, override extension trust support, or load restricted preview resources before trust.
+- Current status: **no bypass found in source review**; clean-profile runtime validation is pending.

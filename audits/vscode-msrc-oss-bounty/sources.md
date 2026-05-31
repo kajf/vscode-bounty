@@ -19,3 +19,5 @@ These sources are references for audit orientation only. Any actual vulnerabilit
 - Git documentation for external diff behavior: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---no-ext-diff
 - Local MCP trust/autostart audit notes: `audits/vscode-msrc-oss-bounty/mcp-trust-audit-2026-05-30.md`
 - Local built-in task-provider audit notes: `audits/vscode-msrc-oss-bounty/builtin-task-provider-audit-2026-05-30.md`
+- Local Markdown/opener audit notes: `audits/vscode-msrc-oss-bounty/markdown-opener-audit-2026-05-31.md`
+- Local restricted workspace-settings audit notes: `audits/vscode-msrc-oss-bounty/restricted-settings-audit-2026-05-31.md`
