@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "emit-benign-terminal-links",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "-e",
+        "for (const s of ['command:workbench.action.showCommands','command:workbench.action.openSettings?%5B%22terminal.integrated.allowedLinkSchemes%22%5D','vscode://file/tmp/example.txt','vscode-insiders://file/tmp/example.txt','file:///tmp/example.txt','https://example.com/%2Bplus?x=%2520','foo+bar://example.test/path']) console.log(s)"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
