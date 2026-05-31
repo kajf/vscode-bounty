@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "node -e \"require('fs').writeFileSync('NPM_SCRIPT_MARKER.txt','npm script ran')\""
+  },
+  "devDependencies": {
+    "gulp": "0.0.0-marker"
+  }
+}

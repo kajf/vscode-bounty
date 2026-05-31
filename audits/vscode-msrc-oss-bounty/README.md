@@ -14,17 +14,16 @@ Primary scenario: a victim opens an attacker-controlled repository or workspace 
 
 - Container working directory: `/workspace/vscode-bounty`.
 - Current branch before committing notes: `work`.
-- Attempted local clone: `git clone --depth=1 https://github.com/microsoft/vscode.git repos/vscode`.
-- Result: blocked by the container network/proxy with `CONNECT tunnel failed, response 403`.
-- Attempted tarball probe: `curl -I -L https://github.com/microsoft/vscode/archive/refs/heads/main.tar.gz`.
-- Result: blocked by the same `CONNECT tunnel failed, response 403` limitation.
-- Because the source tree could not be cloned in this container, this initial pass used browser-accessible upstream pages plus local benign fixtures and did not build or run VS Code.
+- Local clone: `git clone --depth=1 https://github.com/microsoft/vscode.git repos/vscode` succeeded in this pass.
+- Upstream commits audited: initial source pass at `1f98b39208918cace8d36e2a4f20b7b9282508f1`; deeper, Git local-config, and MCP trust/autostart passes at `f6d1fcfcfcb5225125221ff6fdd6ae8c699958d5`; built-in task-provider pass at `7eff9ee6bd6f4bd34c0cbe46837156d452d8a614`; Markdown/opener and restricted-settings passes at `6b1e5513a8bab3688342b3b01de41d4a905b289f`.
+- Full build/run status: not attempted in these passes; source review and fixture preparation were completed, and future runtime validation should use a clean VS Code profile.
+- Local fixture content remains benign and marker-based only, including generated Git helper scripts that append marker text rather than performing destructive actions.
 
 ## Upstream version anchors observed
 
 - GitHub repository page read 2026-05-30 showed branch `main`, repository `microsoft/vscode`, and latest release `1.122.1` dated 2026-05-29.
-- The repository page showed the expected source layout including `src`, `extensions`, `.vscode`, `remote`, `cli`, `build`, and top-level `SECURITY.md`.
+- Local source checkout confirmed the expected source layout including `src`, `extensions`, `.vscode`, `remote`, `cli`, `build`, and top-level `SECURITY.md`.
 
 ## Initial conclusion
 
-No validated, reproducible in-scope vulnerability was found in this initial environment-limited pass. No MSRC report draft is included because the current findings are either expected VS Code behavior, blocked from local validation, or require additional source/build work.
+No validated, reproducible in-scope vulnerability was found in the source-audit passes. A Git local-config helper lead is promising but not report-ready because it still requires clean-profile VS Code runtime validation and likely Workspace Trust analysis. No MSRC report draft is included because the current findings are expected VS Code behavior, source-review-only leads, or require runtime validation against a clean local VS Code profile.
