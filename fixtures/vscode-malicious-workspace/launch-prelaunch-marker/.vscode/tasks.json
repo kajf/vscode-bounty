@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "benign-debug-prelaunch-marker",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "-e",
+        "require('fs').writeFileSync('debug-prelaunch-marker.txt', 'debug preLaunchTask executed\\n')"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
