@@ -64,3 +64,11 @@ A report should only be drafted after a reproducible issue is validated against 
 - Source review result: background/autostart paths generally use `errorOnUserInteraction: true` and should fail closed when Workspace Trust, server trust, or input variables would require UI. `autoTrustChanges: true` was observed on user-facing code-lens Start/Restart/Debug actions, not background autostart.
 - Bounty relevance: high only if a workspace-defined MCP server can start local commands before Workspace Trust, without server trust/nonce approval, or through an automatic path that silently auto-trusts changed definitions.
 - Current status: **no bypass found in source review**; runtime validation remains worthwhile for MCP dev-mode autostart and post-install start flows.
+
+
+## Finding candidate I: built-in task-provider discovery
+
+- Scenario prepared by fixture: a repository contains `package.json`, `gulpfile.js`, and a fake local `node_modules/.bin/gulp` shim that writes a benign marker when task discovery invokes it.
+- Source review result: npm discovery reads `package.json` and creates task objects without running scripts; gulp/grunt/jake discovery can execute local listing commands, but their auto-detect settings default off and task listing/running paths are guarded by the central task-service Workspace Trust prompt.
+- Bounty relevance: high only if default task discovery or task execution can reach repository-controlled commands before Workspace Trust, without the task-listing prompt, or without the relevant user/application setting.
+- Current status: **no bypass found in source review**; clean-profile runtime validation is pending for marker absence before trust and expected marker creation only after explicit trust plus provider opt-in.

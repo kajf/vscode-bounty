@@ -5,7 +5,7 @@ Ranking uses bounty relevance, exploit plausibility, and ability to produce publ
 | Rank | Area | Code paths / artifacts to prioritize | Why it matters | Initial triage status |
 |---:|---|---|---|---|
 | 1 | Workspace trust gates | `src/vs/platform/workspace/common/workspaceTrust.ts`; workbench services that call `IWorkspaceTrustManagementService` and `IWorkspaceTrustRequestService` | A trust bypass could turn normal repository-open behavior into code execution or data exposure. | Source-reviewed in task/debug/MCP paths; broader runtime tests pending. |
-| 2 | Automatic tasks | `src/vs/workbench/contrib/tasks/browser/runAutomaticTasks.ts`; `src/vs/workbench/contrib/tasks/common/taskConfiguration.ts`; `.vscode/tasks.json` | `runOptions.runOn: folderOpen` is an intentional command-execution feature; bounty-worthy only if it runs without trust/permission or bypasses policy. | Reviewed at policy level; fixture added; no bypass found. |
+| 2 | Automatic tasks | `src/vs/workbench/contrib/tasks/browser/runAutomaticTasks.ts`; `src/vs/workbench/contrib/tasks/common/taskConfiguration.ts`; `.vscode/tasks.json` | `runOptions.runOn: folderOpen` is an intentional command-execution feature; bounty-worthy only if it runs without trust/permission or bypasses policy. | Reviewed at policy and built-in provider levels; fixtures added; no bypass found. |
 | 3 | Manual task execution and variable resolution | `abstractTaskService.ts`, `terminalTaskSystem.ts`, configuration resolver service, task inputs | Command strings, `${...}` substitutions, shell/process mode, env/cwd and task inputs are classic injection surfaces. | Source-reviewed for resolver target handling; deeper shell quoting trace pending. Benign fixture added. |
 | 4 | Debug launch configurations | debug service, configuration manager/resolver, extension-contributed debuggers, `.vscode/launch.json` | `preLaunchTask`, debug adapters, command/input variables, and compound configs can lead to local process execution; bounty-worthy only if attacker content crosses consent/trust boundaries. | Source-reviewed; prelaunch fixture added; runtime validation pending. |
 | 5 | Workspace settings | configuration service, restricted settings schema, workspace-trust filtering | Malicious settings can influence terminals, extensions, markdown, tasks, and Git; need to verify restricted/application-scoped settings cannot silently weaken trust. | Source-reviewed; restricted-settings fixture added; runtime validation pending. |
@@ -17,7 +17,7 @@ Ranking uses bounty relevance, exploit plausibility, and ability to produce publ
 
 ## Highest-priority next checks after a successful clone
 
-1. Runtime-test automatic-task execution and restricted workspace settings with a clean VS Code profile; confirm marker files remain absent before explicit trust/allow.
+1. Runtime-test automatic-task execution, built-in task-provider discovery, and restricted workspace settings with a clean VS Code profile; confirm marker files remain absent before explicit trust/allow.
 2. Trace `.vscode/tasks.json` parsing through command construction and terminal spawning for shell quoting edge cases.
 3. Confirm workspace settings marked as restricted cannot be changed by a malicious repository to enable automatic tasks or command URIs.
 4. Trace markdown preview sanitizer and link activation rules for `command:`, `vscode:`, `file:`, and encoded/redirected variants.

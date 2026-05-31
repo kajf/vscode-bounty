@@ -71,3 +71,12 @@ mkdir -p .cache/vscode-user-data .cache/vscode-extensions
 5. After granting trust, observe whether Git repository discovery/status refresh appends `core.fsmonitor invoked`.
 6. Open `tracked.txt` and/or a diff view to observe whether quick diff or explicit diff actions append `diff.external invoked`.
 7. Repeat with `scm.diffDecorations: none` to separate passive editor decorations from explicit diff commands.
+
+## Built-in task-provider autodetect fixture expected result
+
+1. Open `fixtures/vscode-malicious-workspace/task-provider-autodetect` with clean user data and extensions.
+2. Do not grant Workspace Trust and do not run the Tasks command.
+3. Confirm `GULP_AUTODETECT_MARKER.txt` and `NPM_SCRIPT_MARKER.txt` are absent.
+4. Run `Tasks: Run Task`; expected safe behavior is a Workspace Trust prompt before task listing can execute workspace code.
+5. If the folder is trusted and application-scoped `gulp.autoDetect` is explicitly set to `on`, listing tasks may invoke the fake local gulp shim and create `GULP_AUTODETECT_MARKER.txt`; that is expected opt-in discovery behavior, not a reportable issue by itself.
+6. Running the npm `build` task should require deliberate task selection and then create `NPM_SCRIPT_MARKER.txt` as expected task execution behavior.
